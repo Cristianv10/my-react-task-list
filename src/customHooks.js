@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-const useTaskManager = () => {
-  const [tasks, setTasks] = useState([]);
+const useTaskManager = (initialTasks) => {
+  const [tasks, setTasks] = useState(initialTasks || []);
   const [tasksLoaded, setTasksLoaded] = useState(false);
 
   useEffect(() => {
@@ -34,9 +34,15 @@ const useTaskManager = () => {
     setTasks(updatedTasks);
   };
 
-  const editTask = (index, title, description) => {
+  const editTask = (index, title, description, status) => {
     const updatedTasks = [...tasks];
-    updatedTasks[index] = { ...updatedTasks[index], title, description };
+    updatedTasks[index] = { ...updatedTasks[index], title, description, status: status || updatedTasks[index].status};
+    setTasks(updatedTasks);
+  };
+
+  const toggleTaskStatus = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index] = { ...updatedTasks[index],  status: updatedTasks[index].status == 'Completado' ? 'No completado' : 'Completado'};
     setTasks(updatedTasks);
   };
 
@@ -46,6 +52,7 @@ const useTaskManager = () => {
     addTask,
     deleteTask,
     editTask,
+    toggleTaskStatus
   };
 };
 

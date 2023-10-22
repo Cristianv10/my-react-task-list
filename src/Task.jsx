@@ -1,8 +1,9 @@
-const Task = ({ task, index, deleteTask, editTask }) => {
+const Task = ({ task, index, deleteTask, editTask, toggleStatus }) => {
   return (
-    <li>
+    <>
       <div>
         <strong>{task.title}</strong>
+        {task.status == "Completado" ? <span>✔</span> : <span>◻</span>}
         <p>{task.description}</p>
       </div>
       <button onClick={() => deleteTask(index)}>Eliminar</button>
@@ -17,7 +18,14 @@ const Task = ({ task, index, deleteTask, editTask }) => {
       >
         Editar
       </button>
-    </li>
+      <button
+        onClick={() => {
+          toggleStatus(index);
+        }}
+      >
+        {task.status == "Completado" ? "Poner pendiente" : "Completar"}
+      </button>
+    </>
   );
 }
 
