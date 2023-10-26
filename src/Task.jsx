@@ -9,7 +9,7 @@ const Task = ({ task, index, deleteTask, editTask, toggleStatus }) => {
       <button onClick={() => deleteTask(index)}>Eliminar</button>
       <button
         onClick={() => {
-          const newTitle = prompt('Nuevo título:', task.title);
+          const newTitle = prompt('Nuuevo título:', task.title);
           const newDescription = prompt('Nueva descripción:', task.description);
           if (newTitle !== null && newDescription !== null) {
             editTask(index, newTitle, newDescription);
